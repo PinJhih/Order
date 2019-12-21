@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_menu_editor.*
 
-private lateinit var db: SQLiteDatabase
 
 class MenuEditorActivity : AppCompatActivity() {
 
-    var menu = ArrayList<MenuItem>()
+    private var menu = ArrayList<MenuItem>()
+    private lateinit var db: SQLiteDatabase
     private lateinit var adapter: EditorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,22 +21,22 @@ class MenuEditorActivity : AppCompatActivity() {
 
         db = MenuDataBase(this).writableDatabase
 
-
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         recyclerView_editor.layoutManager = linearLayoutManager
         adapter = EditorAdapter(menu)
         recyclerView_editor.adapter = adapter
+
         viewUpdate()
 
         btn_add.setOnClickListener {
-            val i=Intent(this,AddActivity::class.java)
-            startActivityForResult(i,1)
+            val i = Intent(this, AddActivity::class.java)
+            startActivityForResult(i, 1)
         }
     }
 
-    override fun onActivityReenter(resultCode: Int, data: Intent?) {
-        super.onActivityReenter(resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
         viewUpdate()
     }
@@ -52,10 +52,15 @@ class MenuEditorActivity : AppCompatActivity() {
             m.team = data.getInt(1)
             m.name = data.getString(2)
             m.amount = data.getInt(3)
-            menu.add(m)
+            menu.add(MenuItem(m.id, m.team, m.name, m.amount))
             data.moveToNext()
             adapter.notifyDataSetChanged()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        db.close()
     }
 
 }

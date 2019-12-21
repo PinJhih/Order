@@ -3,6 +3,7 @@ package com.example.order
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,7 +14,7 @@ class EditorAdapter(private val contacts: ArrayList<MenuItem>) :
         val name= v.findViewById<TextView>(R.id.tv_name)
         val team= v.findViewById<TextView>(R.id.tv_team)
         val amount= v.findViewById<TextView>(R.id.tv_amount)
-        val item = v.findViewById<TextView>(R.id.layout_item_editor)
+        val item = v.findViewById<LinearLayout>(R.id.layout_item_editor)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {

@@ -8,10 +8,16 @@ import android.os.Bundle
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 
-private var dbRemote = FirebaseFirestore.getInstance()
-private lateinit var db: SQLiteDatabase
 
 class MainActivity : AppCompatActivity() {
+
+    private var dbRemote = FirebaseFirestore.getInstance()
+    private lateinit var db: SQLiteDatabase
+
+    override fun onDestroy() {
+        super.onDestroy()
+        db.close()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +26,9 @@ class MainActivity : AppCompatActivity() {
         db = MenuDataBase(this).writableDatabase
 
 
-        var settings = getSharedPreferences("settings", Activity.MODE_PRIVATE)
+        val settings = getSharedPreferences("settings", Activity.MODE_PRIVATE)
         if (settings.getInt("firstTime", 0) == 0) {
-            settings.edit().putInt("firstTime", 1)
+            settings.edit().putInt("firstTime", 1).commit()
 
             setDataBase()
         }
