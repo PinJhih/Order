@@ -26,8 +26,8 @@ class AddActivity : AppCompatActivity() {
                 try {
                     val m = MenuItem()
                     m.id = "${System.currentTimeMillis()}"
-                    m.name = tv_name.text.toString()
-                    m.amount = tv_name.text.toString().toInt()
+                    m.name = ed_name.text.toString()
+                    m.amount = ed_amount.text.toString().toInt()
                     m.team = if (btn_noodles.isChecked) 1 else 2
 
 
