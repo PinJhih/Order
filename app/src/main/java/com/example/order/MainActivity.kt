@@ -7,11 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var dbRemote = FirebaseFirestore.getInstance()
+    private var remoteDb = FirebaseFirestore.getInstance()
     private lateinit var db: SQLiteDatabase
 
     override fun onDestroy() {
@@ -36,30 +37,30 @@ class MainActivity : AppCompatActivity() {
         dataUpdate()
 
         edit.setOnClickListener {
-            val i= Intent(this,MenuEditorActivity::class.java)
+            val i = Intent(this, MenuEditorActivity::class.java)
             startActivity(i)
         }
 
         team_order.setOnClickListener {
-            val i= Intent(this,OrderActivity::class.java)
+            val i = Intent(this, OrderActivity::class.java)
             startActivity(i)
         }
 
         team_noodles.setOnClickListener {
-            val i= Intent(this,BackActivity::class.java)
-            startActivityForResult(i,1)
+            val i = Intent(this, BackActivity::class.java)
+            startActivityForResult(i, 1)
         }
 
         team_drinks.setOnClickListener {
-            val i= Intent(this,BackActivity::class.java)
-            startActivityForResult(i,2)
+            val i = Intent(this, BackActivity::class.java)
+            startActivityForResult(i, 2)
         }
 
     }
 
     fun setDataBase() {
         db.execSQL("DELETE FROM menu")
-        dbRemote.collection("menu")
+        remoteDb.collection("menu")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -80,12 +81,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun dataUpdate() {
-        dbRemote.collection("menu")
-            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                val changedItems: List<MenuItem> = querySnapshot?.toObjects(MenuItem::class.java) ?: mutableListOf()
+        remoteDb.collection("menu")
+            .addSnapshotListener { querySnapshot, _ ->
+                val changedItems: List<MenuItem> =
+                    querySnapshot?.toObjects(MenuItem::class.java) ?: mutableListOf()
 
-                for(i: MenuItem in changedItems){
-                    if(db.rawQuery("SELECT * FROM menu WHERE id LIKE '${i.id}'",null).count == 0){
+                for (i: MenuItem in changedItems) {
+                    if (db.rawQuery("SELECT * FROM menu WHERE id LIKE '${i.id}'",null).count == 0) {
                         db.execSQL(
                             "INSERT INTO accounts(id,team,name,amount) VALUES(?,?,?,?)",
                             arrayOf<Any?>(
@@ -95,10 +97,10 @@ class MainActivity : AppCompatActivity() {
                                 i.amount
                             )
                         )
-                    }else{
-                        db.execSQL("UPDATE menu SET team = '${i.team}' WHERE id LIKE '${i.id}'")
-                        db.execSQL("UPDATE menu SET name = '${i.name}' WHERE id LIKE '${i.id}'")
-                        db.execSQL("UPDATE menu SET amount = '${i.amount}' WHERE id LIKE '${i.id}'")
+                    } else {
+                            db.execSQL("UPDATE menu SET team = '${i.team}' WHERE id LIKE '${i.id}'")
+                            db.execSQL("UPDATE menu SET name = '${i.name}' WHERE id LIKE '${i.id}'")
+                            db.execSQL("UPDATE menu SET amount = '${i.amount}' WHERE id LIKE '${i.id}'")
                     }
                 }
             }
