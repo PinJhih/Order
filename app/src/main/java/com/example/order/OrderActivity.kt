@@ -46,28 +46,31 @@ class OrderActivity : AppCompatActivity() {
     }
 
     private fun setNewOrder() {
+        total=0
+        tv_total.text="0元"
         orders.clear()
         var orderNumber = OrderNumber()
 
-        remoteDb.collection("orderNumber")
-            .document("number")
+        remoteDb.collection("number")
+            .document("210")
             .get()
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    orderNumber = task.result!!.toObject(OrderNumber::class.java)!!
+                orderNumber = task.result!!.toObject(OrderNumber::class.java)!!
+                orderNumber.number = orderNumber.number+1
+
+                remoteDb.collection("number")
+                    .document("210")
+                    .update("number",orderNumber.number)
+
+                tv_order_number.text = "編號: ${orderNumber.number}"
+
+                for (i in 0 until menu.count()) {
+                    var o = Order()
+                    o.id = "${System.currentTimeMillis()}"
+                    o.number = orderNumber.number
+                    orders.add(o)
                 }
             }
-        orderNumber.number++
-        remoteDb.collection("orderNumber")
-            .document("number")
-            .set(orderNumber)
-
-        for (i in 0 until menu.count()) {
-            var o = Order()
-            o.id = "${System.currentTimeMillis()}"
-            o.number = orderNumber.number
-            orders.add(o)
-        }
     }
 
     private fun upLoadOrder() {

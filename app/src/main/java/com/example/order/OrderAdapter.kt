@@ -28,6 +28,7 @@ class OrderAdapter(private val context: Context, private val menu: ArrayList<Men
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = menu[position].name
         holder.amount.text = menu[position].amount.toString() + "元"
+        holder.quantity.setText("0")
 
         holder.add.setOnClickListener {
             (context as OrderActivity).addQuantity(position)
