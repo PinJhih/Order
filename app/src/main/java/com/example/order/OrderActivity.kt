@@ -119,7 +119,8 @@ data class Order(
     var number: Int = 0,
     var quantity: Int = 0,
     var name: String = "",
-    var team: Int = 0
+    var team: Int = 0,
+    var isDone :Boolean = false
 )
 
 data class OrderNumber(

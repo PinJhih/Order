@@ -48,12 +48,16 @@ class MainActivity : AppCompatActivity() {
 
         team_noodles.setOnClickListener {
             val i = Intent(this, BackActivity::class.java)
-            startActivityForResult(i, 1)
+            i.putExtra("team",0)
+
+            startActivity(i)
         }
 
         team_drinks.setOnClickListener {
             val i = Intent(this, BackActivity::class.java)
-            startActivityForResult(i, 2)
+            i.putExtra("team",1)
+
+            startActivity(i)
         }
 
     }
