@@ -46,8 +46,8 @@ class OrderActivity : AppCompatActivity() {
     }
 
     private fun setNewOrder() {
-        total=0
-        tv_total.text="0元"
+        total = 0
+        tv_total.text = "總額:0元"
         orders.clear()
         var orderNumber = OrderNumber()
 
@@ -56,11 +56,11 @@ class OrderActivity : AppCompatActivity() {
             .get()
             .addOnCompleteListener { task ->
                 orderNumber = task.result!!.toObject(OrderNumber::class.java)!!
-                orderNumber.number = orderNumber.number+1
+                orderNumber.number = orderNumber.number + 1
 
                 remoteDb.collection("number")
                     .document("210")
-                    .update("number",orderNumber.number)
+                    .update("number", orderNumber.number)
 
                 tv_order_number.text = "編號: ${orderNumber.number}"
 
@@ -68,6 +68,8 @@ class OrderActivity : AppCompatActivity() {
                     var o = Order()
                     o.id = "${System.currentTimeMillis()}"
                     o.number = orderNumber.number
+                    o.team = menu[i].team
+                    o.name = menu[i].name
                     orders.add(o)
                 }
             }
@@ -120,7 +122,7 @@ data class Order(
     var quantity: Int = 0,
     var name: String = "",
     var team: Int = 0,
-    var isDone :Boolean = false
+    var done: Boolean = false
 )
 
 data class OrderNumber(

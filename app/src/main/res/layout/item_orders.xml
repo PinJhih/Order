@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_orders"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,28 +9,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="#000000"
-        android:textSize="20sp"
         android:gravity="center"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_orders_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="#000000"
-        android:textSize="20sp"
         android:gravity="center"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_orders_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="#000000"
-        android:textSize="20sp"
         android:gravity="center"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.order
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,10 @@ class BackAdapter(private val context: Context, private val contacts: ArrayList<
     RecyclerView.Adapter<BackAdapter.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val name = v.findViewById<TextView>(R.id.tv_orders_number)
+        val name = v.findViewById<TextView>(R.id.tv_orders_name)
         val amount = v.findViewById<TextView>(R.id.tv_orders_amount)
         val number = v.findViewById<TextView>(R.id.tv_orders_number)
+        val item = v.findViewById<LinearLayout>(R.id.item_orders)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
@@ -28,5 +30,14 @@ class BackAdapter(private val context: Context, private val contacts: ArrayList<
         holder.number.text = contacts[position].number.toString()
         holder.name.text = contacts[position].name
         holder.amount.text = contacts[position].quantity.toString()
+        holder.item.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("完成?")
+                .setPositiveButton("確定") { _, _ ->
+                    (context as BackActivity).orderDone(contacts[position].id)
+                }
+                .setNegativeButton("取消") { _, _ -> }
+                .show()
+        }
     }
 }
