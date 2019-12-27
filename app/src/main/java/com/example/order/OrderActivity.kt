@@ -76,12 +76,17 @@ class OrderActivity : AppCompatActivity() {
     }
 
     private fun upLoadOrder() {
-        for (i in 0 until orders.count()) {
-            remoteDb.collection("orders")
-                .document("${orders[i].id}")
-                .set(orders[i])
-        }
-        setNewOrder()
+        Thread(
+            Runnable {
+                for (i in 0 until orders.count()) {
+                    remoteDb.collection("orders")
+                        .document("${orders[i].id}")
+                        .set(orders[i])
+                    Thread.sleep(800)
+                }
+                setNewOrder()
+            }
+        ).run()
     }
 
     private fun viewUpdate() {
