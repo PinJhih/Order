@@ -24,7 +24,6 @@ class BackActivity : AppCompatActivity() {
 
         intent?.extras?.let {
             team = it.getInt("team")
-            println("~~~ $team")
         }
 
         val linearLayoutManager = LinearLayoutManager(this)
@@ -38,6 +37,7 @@ class BackActivity : AppCompatActivity() {
 
     private fun viewUpdate(team: Int) {
         orders.clear()
+        adapter.notifyDataSetChanged()
         remoteDb.collection("orders")
             .whereEqualTo("team", team)
             .whereEqualTo("done", false)
@@ -46,8 +46,10 @@ class BackActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         val o = document.toObject(Order::class.java)
-                        orders.add(o)
-                        adapter.notifyDataSetChanged()
+                        if(o.quantity !=0) {
+                            orders.add(o)
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }

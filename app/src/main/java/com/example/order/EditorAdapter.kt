@@ -16,7 +16,6 @@ class EditorAdapter(private val context: Context, private val contacts: ArrayLis
         val name = v.findViewById<TextView>(R.id.tv_name)
         val team = v.findViewById<TextView>(R.id.tv_team)
         val amount = v.findViewById<TextView>(R.id.tv_amount)
-        val item = v.findViewById<LinearLayout>(R.id.layout_item_editor)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
@@ -30,20 +29,5 @@ class EditorAdapter(private val context: Context, private val contacts: ArrayLis
         holder.name.text = contacts[position].name
         holder.team.text = if (contacts[position].team == 1) "炒泡麵組" else "飲料組"
         holder.amount.text = contacts[position].amount.toString()
-
-        holder.item.setOnClickListener {
-            /*
-            AlertDialog.Builder(context)
-                .setTitle("刪除??")
-                .setMessage("確定刪除此項目?")
-                .setPositiveButton("刪除") { _, _ ->
-                    TODO("delete")
-                }
-                .setNeutralButton("取消") { _, _ ->
-                    Toast.makeText(context,"取消",Toast.LENGTH_SHORT).show()
-                }
-                .show()
-            */
-        }
     }
 }

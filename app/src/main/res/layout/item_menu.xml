@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,34 +8,45 @@
 
     <TextView
         android:id="@+id/tv_item_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="TextView"
         android:gravity="center"
+        android:text="TextView"
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_item_amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_item_amount"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="TextView"
         android:gravity="center"
+        android:text="TextView"
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_name"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_amount"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/img_add"
+            android:id="@+id/img_minus"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -43,35 +54,33 @@
             app:layout_constraintEnd_toStartOf="@+id/ed_quantity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/minus" />
 
         <EditText
             android:id="@+id/ed_quantity"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:ems="2"
             android:inputType="textPersonName"
             android:text="0"
-            app:layout_constraintEnd_toStartOf="@+id/img_minus"
-            app:layout_constraintStart_toEndOf="@+id/img_add"
+            app:layout_constraintEnd_toStartOf="@+id/img_add"
+            app:layout_constraintStart_toEndOf="@+id/img_minus"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/img_minus"
+            android:id="@+id/img_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ed_quantity"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/minus" />
+            app:srcCompat="@drawable/add" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,7 +82,7 @@ class OrderActivity : AppCompatActivity() {
                     remoteDb.collection("orders")
                         .document("${orders[i].id}")
                         .set(orders[i])
-                    Thread.sleep(800)
+                    Thread.sleep(100)
                 }
                 setNewOrder()
             }

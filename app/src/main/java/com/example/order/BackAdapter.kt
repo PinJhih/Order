@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 
 class BackAdapter(private val context: Context, private val contacts: ArrayList<Order>) :
@@ -16,7 +17,7 @@ class BackAdapter(private val context: Context, private val contacts: ArrayList<
         val name = v.findViewById<TextView>(R.id.tv_orders_name)
         val amount = v.findViewById<TextView>(R.id.tv_orders_amount)
         val number = v.findViewById<TextView>(R.id.tv_orders_number)
-        val item = v.findViewById<LinearLayout>(R.id.item_orders)
+        val item = v.findViewById<ConstraintLayout>(R.id.item_orders)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {

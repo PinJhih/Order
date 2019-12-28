@@ -9,7 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
-
 class MainActivity : AppCompatActivity() {
 
     private var remoteDb = FirebaseFirestore.getInstance()
@@ -48,14 +47,14 @@ class MainActivity : AppCompatActivity() {
 
         team_noodles.setOnClickListener {
             val i = Intent(this, BackActivity::class.java)
-            i.putExtra("team",1)
+            i.putExtra("team", 1)
 
             startActivity(i)
         }
 
         team_drinks.setOnClickListener {
             val i = Intent(this, BackActivity::class.java)
-            i.putExtra("team",2)
+            i.putExtra("team", 2)
 
             startActivity(i)
         }
@@ -91,7 +90,11 @@ class MainActivity : AppCompatActivity() {
                     querySnapshot?.toObjects(MenuItem::class.java) ?: mutableListOf()
 
                 for (i: MenuItem in changedItems) {
-                    if (db.rawQuery("SELECT * FROM menu WHERE id LIKE '${i.id}'",null).count == 0) {
+                    if (db.rawQuery(
+                            "SELECT * FROM menu WHERE id LIKE '${i.id}'",
+                            null
+                        ).count == 0
+                    ) {
                         db.execSQL(
                             "INSERT INTO accounts(id,team,name,amount) VALUES(?,?,?,?)",
                             arrayOf<Any?>(
@@ -102,9 +105,9 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                     } else {
-                            db.execSQL("UPDATE menu SET team = '${i.team}' WHERE id LIKE '${i.id}'")
-                            db.execSQL("UPDATE menu SET name = '${i.name}' WHERE id LIKE '${i.id}'")
-                            db.execSQL("UPDATE menu SET amount = '${i.amount}' WHERE id LIKE '${i.id}'")
+                        db.execSQL("UPDATE menu SET team = '${i.team}' WHERE id LIKE '${i.id}'")
+                        db.execSQL("UPDATE menu SET name = '${i.name}' WHERE id LIKE '${i.id}'")
+                        db.execSQL("UPDATE menu SET amount = '${i.amount}' WHERE id LIKE '${i.id}'")
                     }
                 }
             }
