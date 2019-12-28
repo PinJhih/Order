@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        var m = document.toObject(MenuItem::class.java)
+                        val m = document.toObject(MenuItem::class.java)
                         db.execSQL(
                             "INSERT INTO menu(id,team,name,amount) VALUES(?,?,?,?)",
                             arrayOf<Any?>(
@@ -83,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    fun dataUpdate() {
+    private fun dataUpdate() {
         remoteDb.collection("menu")
             .addSnapshotListener { querySnapshot, _ ->
                 val changedItems: List<MenuItem> =

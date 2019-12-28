@@ -15,7 +15,7 @@ class OrderAdapter(private val context: Context, private val menu: ArrayList<Men
         val amount = v.findViewById<TextView>(R.id.tv_item_amount)
         val add = v.findViewById<ImageView>(R.id.img_add)
         val minus = v.findViewById<ImageView>(R.id.img_minus)
-        val quantity =v.findViewById<EditText>(R.id.ed_quantity)
+        val quantity = v.findViewById<EditText>(R.id.ed_quantity)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
@@ -32,13 +32,13 @@ class OrderAdapter(private val context: Context, private val menu: ArrayList<Men
 
         holder.add.setOnClickListener {
             (context as OrderActivity).addQuantity(position)
-            val q = holder.quantity.text.toString().toInt()+1
+            val q = holder.quantity.text.toString().toInt() + 1
             holder.quantity.setText("$q")
         }
         holder.minus.setOnClickListener {
-            if(holder.quantity.text.toString() != "0"){
+            if (holder.quantity.text.toString() != "0") {
                 (context as OrderActivity).minusQuantity(position)
-                val q = holder.quantity.text.toString().toInt()-1
+                val q = holder.quantity.text.toString().toInt() - 1
                 holder.quantity.setText("$q")
             }
         }

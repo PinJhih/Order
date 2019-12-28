@@ -6,9 +6,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_back.*
-import kotlinx.android.synthetic.main.activity_order.*
 
 class BackActivity : AppCompatActivity() {
 
@@ -46,7 +44,7 @@ class BackActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         val o = document.toObject(Order::class.java)
-                        if(o.quantity !=0) {
+                        if (o.quantity != 0) {
                             orders.add(o)
                             adapter.notifyDataSetChanged()
                         }
@@ -58,7 +56,7 @@ class BackActivity : AppCompatActivity() {
     private fun dataUpdate(team: Int) {
         remoteDb.collection("orders")
             .whereEqualTo("team", team)
-            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            .addSnapshotListener { _, _ ->
                 viewUpdate(team)
             }
     }
@@ -68,8 +66,8 @@ class BackActivity : AppCompatActivity() {
             remoteDb.collection("orders")
                 .document(id)
                 .update("done", true)
-        }catch (e:Exception){
-            Toast.makeText(this,"錯誤!!!",Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "錯誤!!!", Toast.LENGTH_SHORT).show()
         }
     }
 }

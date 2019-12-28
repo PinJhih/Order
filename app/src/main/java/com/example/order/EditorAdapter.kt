@@ -1,21 +1,18 @@
 package com.example.order
 
-import android.app.AlertDialog
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class EditorAdapter(private val context: Context, private val contacts: ArrayList<MenuItem>) :
+class EditorAdapter(private val contacts: ArrayList<MenuItem>) :
     RecyclerView.Adapter<EditorAdapter.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val name = v.findViewById<TextView>(R.id.tv_name)
-        val team = v.findViewById<TextView>(R.id.tv_team)
-        val amount = v.findViewById<TextView>(R.id.tv_amount)
+        val name = v.findViewById<TextView>(R.id.tv_name)!!
+        val team = v.findViewById<TextView>(R.id.tv_team)!!
+        val amount = v.findViewById<TextView>(R.id.tv_amount)!!
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {

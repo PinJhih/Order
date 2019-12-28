@@ -8,7 +8,6 @@ class MenuDataBase(
     context: Context, name: String = database,
     factory: SQLiteDatabase.CursorFactory? = null, version: Int = v
 ) :
-
     SQLiteOpenHelper(context, name, factory, version) {
     companion object {
         private const val database = "SchoolFair.db"

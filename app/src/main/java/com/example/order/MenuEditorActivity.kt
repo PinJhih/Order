@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_menu_editor.*
 
 
 class MenuEditorActivity : AppCompatActivity() {
 
     private lateinit var db: SQLiteDatabase
-    private var remoteDb = FirebaseFirestore.getInstance()
     private lateinit var adapter: EditorAdapter
     private var menu = ArrayList<MenuItem>()
 
@@ -26,7 +24,7 @@ class MenuEditorActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         recyclerView_editor.layoutManager = linearLayoutManager
-        adapter = EditorAdapter(this, menu)
+        adapter = EditorAdapter(menu)
         recyclerView_editor.adapter = adapter
 
         viewUpdate()

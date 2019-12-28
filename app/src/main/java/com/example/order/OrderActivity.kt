@@ -7,9 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_menu_editor.*
 import kotlinx.android.synthetic.main.activity_order.*
-import kotlinx.android.synthetic.main.item_menu.view.*
 
 class OrderActivity : AppCompatActivity() {
 

@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add.*
-import kotlinx.android.synthetic.main.item_editor.*
-
-private var dbRemote = FirebaseFirestore.getInstance()
-private lateinit var db: SQLiteDatabase
 
 class AddActivity : AppCompatActivity() {
+
+    private var dbRemote = FirebaseFirestore.getInstance()
+    private lateinit var db: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,7 @@ class AddActivity : AppCompatActivity() {
                         arrayOf<Any?>(m.id, m.team, m.name, m.amount)
                     )
                     dbRemote.collection("menu")
-                        .document("${m.id}")
+                        .document(m.id)
                         .set(m)
                     finish()
                 } catch (e: Exception) {
